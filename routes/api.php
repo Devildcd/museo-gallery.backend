@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+Route::post('/only-imagen', 'App\Http\Controllers\ImagenController@store');
 // 
 
 Route::group( ['middleware' => ["auth:sanctum"]], function(){
 
-
+    
     Route::get('user-profile', [UserController::class, 'userProfile']);
     Route::put('user-edit', [UserController::class, 'updateUsers']);
     Route::get('logout', [UserController::class, 'logout']);
@@ -35,7 +35,7 @@ Route::group( ['middleware' => ["auth:sanctum"]], function(){
     Route::delete('/content/{id}', 'App\Http\Controllers\ContentController@destroy');
 
     //rutas privadas para imagenes
-    Route::post('/only-imagen', 'App\Http\Controllers\ImagenController@store');
+    
     Route::delete('/delete-all-images/{id}', 'App\Http\Controllers\ContentController@deleteAllImages');
     Route::delete('/imagen/{id}', 'App\Http\Controllers\ContentController@deleteImage');
 

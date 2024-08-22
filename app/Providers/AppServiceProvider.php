@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Database\Events\MigrationsEnded;
 use Illuminate\Support\Facades\Event;
@@ -22,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if(env('APP_ENV') === 'production') {
+            URL::forceScheme('https');
+        }
         Event::listen(MigrationsEnded::class, function () {
             $this->app[Kernel::class]->call('db:seed', ['--class' => 'SuperuserSeeder']);
         });
